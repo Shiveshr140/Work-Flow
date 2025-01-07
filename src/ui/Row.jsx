@@ -16,8 +16,6 @@ const Row = styled.div`
     `}
 `;
 
-//// lets make vertical as default prop, this has nothing to do with styled component it is react way of doing
-
 Row.defaultProps = {
   type: "vertical",
 };

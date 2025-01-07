@@ -31,7 +31,7 @@ import { useNavigate } from "react-router";
 
 ////**************************************** Adding Optional Breakfast
 
-function useCheckin() {
+function useCheckin(to) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutate: checkin, isLoading: isCheckingIn } = useMutation({
@@ -44,7 +44,9 @@ function useCheckin() {
     onSuccess: (data) => {
       toast.success(`Booking #${data.id} successfully checked in`);
       queryClient.invalidateQueries({ active: true });
-      navigate("/");
+      if (!to) {
+        navigate("/");
+      }
     },
     onError: (error) => {
       console.log(error);

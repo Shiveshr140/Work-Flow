@@ -36,7 +36,6 @@ import Pagination from "../../ui/Pagination";
 ////********************************************** Builiding booking table and Pagination
 // include <Empty />
 // get the data from apiCabins just like useCabins.js
-// just remember you need to return something for isLoading otherwise error
 
 // function BookingTable() {
 //   const { isLoading, bookings } = useBookings();

@@ -11,6 +11,8 @@ import {
   HiArrowDown,
   HiArrowUpOnSquare,
   HiEye,
+  HiOutlineArrowPath,
+  HiOutlineCheckCircle,
   HiTrash,
 } from "react-icons/hi2";
 import { useNavigate } from "react-router";
@@ -344,6 +346,12 @@ function BookingRow({
                 Check out
               </Menus.Button>
             )}
+            <Menus.Button
+              icon={<HiOutlineArrowPath />}
+              onClick={() => navigate(`/workflow/${bookingId}`)}
+            >
+              See Work Flow
+            </Menus.Button>
             <Modal.Open opens="delete">
               <Menus.Button icon={<HiTrash />}>Delete booking</Menus.Button>
             </Modal.Open>

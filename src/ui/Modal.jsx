@@ -109,16 +109,8 @@ const Button = styled.button`
 
 ////****************************************************** Converting the Modal to a Compound Component
 // If you see in AddCabin.jsx how can we connect that event handler now at button in <Modal.Open> <Button>
-// so we need to solve this problem. So again, what we need to do is now a way of adding that open event handler to this button, so to the children prop of open. So basically adding this function here to the children. And the way we can do this is by using
-// a pretty advanced React function called cloneElement. So first of all, here we see that cloneElement is pretty uncommon. And so one thing that's important to mention here is that you should not overuse the technique that we are going to implement here soon.
-// But anyway, this technique can still be pretty useful because the clone elements basically allows us to create a new React element based on another one. So we in the element, and then we can pass in props,
-// which will solve our problem here in our case. And it's the reason why we're going to use this. So instead of children, we will clone the children. So we will basically create a new version of the children but with new props. And so those props will contain the onClick prop.
-// And then this onClick prop will become a function that actually opens a modal window. So this function will then call open with the opens prop. So let's actually maybe change this here
 // to make it a bit more explicit. So opensWindowName.
 // const clonedElement = cloneElement(element, props, ...children)
-
-// You may notice styling is again off because remeber type prop in createcabinform i.e if onCloseModal then it is "modal"  otherwise "regular" as onCloseModal no longer exist
-// fix this again with cloneElement
 
 // // step 1 create context
 // const ModalContext = createContext();
@@ -168,20 +160,6 @@ const Button = styled.button`
 // export default Modal;
 
 ////***************************************************************** Detecting Click outside the modal
-// add some global event listeners for a click event. so let's then manually select this element using a ref. So const ref will come from the useRef hook just like this, and now, we can add that here with the ref prop, and then we can use this selected element right here in our handler.
-// So first of all, we need to check if that ref even exists, so for that, we can check ref.current, which is basically where the DOM node that references this element here will be stored.
-// ref.curret is this modal window, ref.current.contains(element) is true if this contain element.
-
-// All right, now, there's just one problem with this, because watch what happens as I click here(add cabin/show table) again. So that's very strange, right? So we get click outside, but the window doesn't show up, so what strange thing is happening here? Well, the reason for this is actually the way that events work in JavaScript, and in particular, the fact that events bubble up.
-// So whenever I click here on this button, the modal window will be attached to the DOM, right? And it will be attached right here as a direct child of the body, and so if I click on the button, that event will bubble up all the way through the DOM until it also reaches that modal window, and so then the click is basically detected outside the modal window, which will immediately close that window again,
-// so our logic is actually working just fine. So again, when we click here, the modal window basically gets opened for a millisecond, but then it immediately detects a click outside of it, and so then it will immediately close again, and so the way that we fix this is to not listen
-// for these events on the bubbling phase, but on the capturing phase, so basically, as the event moves down the DOM tree and not up the DOM tree,
-
-// And if all of this sounds a bit strange, then this is just the way that events work in JavaScript, and I have a whole lecture about this in the section on how React works behind the scenes, so please go back there if this is strange to you, but in any case, we can change this default behavior by here, passing in a third argument, which is simply to set this to true. And so if we use true here, then again,
-// the event will actually be handled in the capturing phase, so as the event moves down the tree. So then here the same thing, let's just reload here, let's click, and nice. So that solves our problem,
-
-// Detail explaination of why we handled it in capturing phase so every event has three phases capture, target and bubble up so when we click add new cabin then w/o true then it is capturing phase it travel from root to target element that is button and event attached to button(onClick) will run it will open the modal window then event come in buble phase that it will travel from target to root then at rrot if condition will run as button is not the part styledModal so modal will closs immediately
-// now with true then event will run in capture phase modal will not open then event travel to target onClick open the window then in bubble phase at the event is already removed it will not run again.
 
 // // step 1 create context
 // const ModalContext = createContext();

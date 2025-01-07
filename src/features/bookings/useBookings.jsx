@@ -32,7 +32,6 @@ import { PAGE_SIZE } from "../../utils/constants";
 // }
 
 ////****************************************** API-Side Pagination: Paginating Booking & Prefetching
-// after page go apiBookings.jsx again
 //// So here we have the Query itself and then before we return this stuff, let's have or prefetching. And the way this works is that we first need to QueryClient and then on there we call the Prefetch Query method
 //// handle the error bcs it will still gonna fetch the next page data if you are at the last page even that will be empyty []
 //// Also handle the previous page loading if you visited that page first tym as you are on say page =3 initially

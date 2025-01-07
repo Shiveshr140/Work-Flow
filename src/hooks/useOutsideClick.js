@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 
+//// capture the event in capturing phase listenCapaturing = true
 export function useOutsideClick(handler, listenCapaturing = true) {
   const ref = useRef();
   useEffect(() => {

@@ -12,7 +12,7 @@ const FullPage = styled.div`
   justify-content: center;
 `;
 
-//// starting with loading the authenticated user. And so for that, we once again will create a new function here in API auth. Now you might wonder why we actually need a function to load the user from Supabase again if we just saw the user here in the console right after logging in. Now the thing is that the user might want to access this page a bit later,
+//// starting with loading the authenticated user. And so for that, we once again will create a new function here in API auth.
 //// so not only after they have logged in. So in a web application, even if you logged in like a day ago and if you then reload the page, you will still want to be logged in, not only immediately after you do that login process. And so then each time that you reload the page, for example, a day later, then that user will need to be refetched from the Supabase API.
 //// create function apiAuth
 //// do not use navigate at top level of component instead use useEffect

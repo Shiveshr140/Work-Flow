@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Tooltip } from "react-tooltip";
 
 const StyledStat = styled.div`
   /* Box */
@@ -47,13 +48,25 @@ const Value = styled.p`
   font-weight: 500;
 `;
 
-function Stat({ icon, title, value, color }) {
+function Stat({ icon, title, value, color, id, tooltipContent }) {
   return (
-    <StyledStat>
-      <Icon color={color}>{icon}</Icon>
-      <Title>{title}</Title>
-      <Value>{value}</Value>
-    </StyledStat>
+    <>
+      <StyledStat data-tooltip-content={tooltipContent} data-tooltip-id={id}>
+        <Icon color={color}>{icon}</Icon>
+        <Title>{title}</Title>
+        <Value>{value}</Value>
+      </StyledStat>
+      {/* just to show stats title when you hover over it  */}
+      <Tooltip
+        id={id}
+        style={{
+          backgroundColor: "var(--color-grey-900)",
+          color: "var(--color-grey-50)",
+          borderRadius: "5px",
+          padding: "8px",
+        }}
+      />
+    </>
   );
 }
 

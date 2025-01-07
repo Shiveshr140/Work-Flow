@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { formatCurrency } from "../../utils/helpers";
 import useCheckin from "./useCheckin";
 import { useSettings } from "../settings/useSettings";
+import { useNavigate } from "react-router";
 
 const Box = styled.div`
   /* Box */
@@ -23,42 +24,6 @@ const Box = styled.div`
   border-radius: var(--border-radius-md);
   padding: 2.4rem 4rem;
 `;
-
-// function CheckinBooking() {
-//   const { booking, isLoading } = useBooking();
-//   const moveBack = useMoveBack();
-//   if (isLoading) return <Spinner />;
-//   const {
-//     id: bookingId,
-//     guests,
-//     totalPrice,
-//     numGuests,
-//     hasBreakfast,
-//     numNights,
-//   } = booking;
-
-//   function handleCheckin() {}
-
-//   return (
-//     <>
-//       <Row type="horizontal">
-//         <Heading as="h1">Check in booking #{bookingId}</Heading>
-//         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
-//       </Row>
-
-//       <BookingDataBox booking={booking} />
-
-//       <ButtonGroup>
-//         <Button onClick={handleCheckin}>Check in booking #{bookingId}</Button>
-//         <Button variation="secondary" onClick={moveBack}>
-//           Back
-//         </Button>
-//       </ButtonGroup>
-//     </>
-//   );
-// }
-
-// export default CheckinBooking;
 
 ////************************ Check in booking
 // now it's time to implement that small feature where the hotel employee needs to confirm whether this booking has already been paid. And so for that, we will want to add a checkbox down here and then the user has to click that checkbox and only then they can confirm right here. All right, at least in case the booking hasn't been paid yet. So, if we want the checkbox here
@@ -141,6 +106,7 @@ function CheckinBooking() {
   const { settings, isLoading: isLoadingSettings } = useSettings();
   const moveBack = useMoveBack();
   const { checkin, isCheckingIn } = useCheckin();
+  const navigate = useNavigate();
 
   useEffect(
     function () {
@@ -221,6 +187,9 @@ function CheckinBooking() {
       <ButtonGroup>
         <Button onClick={handleCheckin} disabled={!confirmPaid || isCheckingIn}>
           Check in booking #{bookingId}
+        </Button>
+        <Button onClick={() => navigate(`/workflow/${bookingId}`)}>
+          Flow booking #{bookingId}
         </Button>
         <Button variation="secondary" onClick={moveBack}>
           Back
